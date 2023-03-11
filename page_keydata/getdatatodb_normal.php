@@ -181,6 +181,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }    
   } else {
-
+    if  (! headers_sent()) {
+      header("Location: ../main.php?page=keydata_normal");
+    } else {
+        echo '<script type="text/javascript">
+                window.location = "../main.php?page=keydata_normal";
+              </script>';
+    }
   }
 ?>
