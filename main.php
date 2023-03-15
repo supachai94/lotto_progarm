@@ -157,7 +157,7 @@ if(empty($_SESSION['username']) && empty($_SESSION['password'])){
 
                 default:
                     //echo "Home";
-                    include("./page_report/page_report.php");
+                    include("./page_report/page_report_total.php");
                 }
                 ?>
 

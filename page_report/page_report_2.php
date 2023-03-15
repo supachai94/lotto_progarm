@@ -1,9 +1,11 @@
 <?php include("./page_report/page_report_header.php"); ?>
+
+
 <div class="container">
   <div class="row">
     <div class="col">        
         <div class="table-responsive">
-            <table class="table table-bordered text-center table-striped">
+            <table id="td1" class="table table-bordered text-center table-striped">
             <thead>
                 <tr class="table-info">
                     <td colspan="2">สองตัวบน</td>
@@ -49,7 +51,7 @@
     </div>
     <div class="col">
         <div class="table-responsive">
-            <table class="table table-bordered text-center table-striped">
+            <table id="td2" class="table table-bordered text-center table-striped">
             <thead>
                 <tr class="table-info">
                     <td colspan="2">สองตัวล่าง</td>
@@ -92,7 +94,10 @@
             </tfoot>
             </table>
         </div>
-    </div>
+      </div>
   </div>
 </div>
+
+<div class="no-print">
 <?php include("./page_report/page_report_foot.php"); ?>
+</div>

@@ -1,4 +1,7 @@
+<div class="no-print">
 <?php include("./page_report/page_report_header.php"); ?>
+</div>
+
 <div class="container">
   <div class="row">
     <div class="col">        

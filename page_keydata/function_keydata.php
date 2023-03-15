@@ -28,20 +28,33 @@ function send_downdb($input_number, $down_amount, $dealer_id) {
     //echo "saved";
 }
 
-function send_alternatedb($input_number, $alternate, $dealer_id) {
+function send_alternatedb_top($input_number, $alternate, $dealer_id) {
     require '../connect.php';
     if (substr($input_number,-1,1) !== substr($input_number,-2,1)){
     $input_rv = substr($input_number,-1,1).substr($input_number,-2,1);
     //กลับต้องกลับทั้งบนทั้งล่าง
     $top_amount = $alternate;
-    $down_amount = $alternate;
     send_topdb($input_rv, (int)$top_amount, (int)$dealer_id); // call the function
     //send_topdb($input_rv, $top_amount, $dealer_id);
+
+    }else {
+            $_SESSION['save_empty'] = "ตัวเลขซ้ำกลับไม่ได้";
+        }
+
+    //echo "saved";
+}
+
+function send_alternatedb_down($input_number, $alternate, $dealer_id) {
+    require '../connect.php';
+    if (substr($input_number,-1,1) !== substr($input_number,-2,1)){
+    $input_rv = substr($input_number,-1,1).substr($input_number,-2,1);
+    //กลับต้องกลับทั้งบนทั้งล่าง
+    $down_amount = $alternate;
     send_downdb($input_rv, (int)$down_amount, (int)$dealer_id); // call the function
     //send_downdb($input_rv, $down_amount, $dealer_id);
 
     }else {
-            //echo "เลขซ้ำกลับไม่ได้";
+            $_SESSION['save_empty'] = "ตัวเลขซ้ำกลับไม่ได้";
         }
 
     //echo "saved";

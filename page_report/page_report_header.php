@@ -1,6 +1,6 @@
 <?php require './connect.php'; ?>
 <body>
-<div class="container-sm">
+<div class="container-sm no-print">
     <div class="table-responsive">
         <table class="table table-bordered text-center">
         <thead>
@@ -50,8 +50,7 @@
                     $down3 = (int)$result_total_down[0][0];
                     $rv3 = (int)$result_total_rv[0][0];
                     
-                    $total_all = $top2+$down2+$top3+$down3+$rv3
-                    
+                    $total_all = $top2+$down2+$top3+$down3+$rv3  
                 ?>
             <tr class="table-secondary">
                 <td><b><?php echo number_format( $top2, 0 ); ?> บาท</td>
@@ -68,7 +67,7 @@
     </div>
 </div>
 
-<div class="container-sm">
+<div class="container-sm no-print">
     <div class="table-responsive">
         <table class="table table-bordered text-center">
         <tbody>
@@ -86,8 +85,7 @@
         </table>
     </div>
 </div>
-</body>
-</html> 
+
 
 
 

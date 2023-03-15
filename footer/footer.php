@@ -5,7 +5,7 @@
 				<div align="center">
           <table width="100%"  border="0">
             <tr>
-              <td><div align="center"><strong>-----------</strong></div></td>
+              <td><div align="center"><strong></strong></div></td>
             </tr>
           </table>
 				</div>

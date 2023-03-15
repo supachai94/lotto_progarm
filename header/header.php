@@ -31,20 +31,84 @@
 
 </head>
 
+<style>
+    @media print {
+      .no-print {
+        display: none;
+      }
+    
+      /* ซ่อนส่วนหัวของ card */
+      .card-header {
+        display: none;
+      }
+
+      /* ลบขอบและพื้นหลังของ card */
+      .card {
+        border: none;
+        background: none;
+        box-shadow: none;
+        padding: 0;
+      }
+    }
+
+    @media print {
+      /* ให้ thead แสดงในทุกหน้า */
+      thead {
+        display: table-header-group;
+      }
+
+      /* ให้ tfoot แสดงเฉพาะในหน้าสุดท้าย */
+      tfoot {
+        display: table-row-group;
+      }
+
+      /* ให้ tbody แสดงในทุกหน้า */
+      tbody {
+        display: table-row-group;
+      }
+    }
+
+    @media print {
+      /* กำหนดตารางให้ชิดด้านบน */
+      table {
+        margin-top: 0;
+        vertical-align: top;
+      }
+
+      /* หากตารางอยู่ในตัวบรรจุ กำหนดให้ตัวบรรจุไม่มีพื้นที่ว่างด้านบน */
+      .container {
+        margin-top: 0;
+        padding-top: 0;
+      }
+
+      /* หากตารางอยู่ในตัวบรรจุ กำหนดให้ตัวบรรจุไม่มีพื้นที่ว่างด้านบน */
+      .card {
+        margin-top: 0;
+        padding-top: 0;
+      }
+    }
+</style>
+
 <body>
+  <div class="no-print">
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
-   <div class="d-flex align-items-center justify-content-between">
-      <i class="bi bi-list toggle-sidebar-btn"></i>
-    </div> 
-    <!-- End Logo -->
+  <div class="d-flex align-items-center justify-content-between">
+    <i class="bi bi-list toggle-sidebar-btn"></i>
+  </div> 
+  <!-- End Logo -->
 
   </header><!-- End Header -->
 
+
+  
+
+
+
   <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
-
+  
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
@@ -113,7 +177,10 @@
 
   </footer><!-- End Footer -->
 
+  
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  </div>
+  
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>

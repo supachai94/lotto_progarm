@@ -120,5 +120,4 @@
         </div>
     </div>
   </div>    
-</script>
 <?php include("./page_report/page_report_foot.php"); ?>

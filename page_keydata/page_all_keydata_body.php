@@ -2,13 +2,13 @@
 
 if (empty ($dealer_id)) {
     //query data
-    $stmt = $conn->prepare("SELECT * FROM lottonumber INNER JOIN dealer ON lottonumber.dealer_id = dealer.dealer_id WHERE typelotto IN ('CA', 'CB', 'AB', 'AC', 'AD') AND lottonumber.dealer_id ORDER BY date DESC LIMIT 0, 30;");
+    $stmt = $conn->prepare("SELECT * FROM lottonumber INNER JOIN dealer ON lottonumber.dealer_id = dealer.dealer_id WHERE typelotto IN ('CA', 'CB', 'AB', 'AC', 'AD') AND lottonumber.dealer_id ORDER BY date DESC;");
     $stmt->execute();
     $result = $stmt->fetchAll(); //แสดงข้อมูลทั้งหมด
     # code...
 } else {
     //query data
-    $stmt = $conn->prepare("SELECT * FROM lottonumber INNER JOIN dealer ON lottonumber.dealer_id = dealer.dealer_id WHERE typelotto IN ('CA', 'CB', 'AB', 'AC', 'AD') AND lottonumber.dealer_id LIKE $dealer_id ORDER BY date DESC LIMIT 0, 30;");
+    $stmt = $conn->prepare("SELECT * FROM lottonumber INNER JOIN dealer ON lottonumber.dealer_id = dealer.dealer_id WHERE typelotto IN ('CA', 'CB', 'AB', 'AC', 'AD') AND lottonumber.dealer_id LIKE $dealer_id ORDER BY date DESC;");
     $stmt->execute();
     $result = $stmt->fetchAll(); //แสดงข้อมูลทั้งหมด
     # code...
@@ -16,9 +16,10 @@ if (empty ($dealer_id)) {
 
 ?>
 
+
 <form method="post">
-        <div class="table-responsive">
-                <table class="table table-bordered border-warning table-warning table-striped table-hover text-center">
+        <div class="table-responsive" style="overflow: auto; display: block; height: 600px; width: 100%; margin: 0 auto;">
+                <table class="table table-bordered border-warning table-warning table-striped table-hover text-center" >
                     <thead class="table bg-warning bg-gradient border-warning text-dark">
                         <tr>
                             <td><strong>ประเภทหวย</strong></td>
@@ -29,7 +30,7 @@ if (empty ($dealer_id)) {
                             <td><strong>เลือกที่ต้องการลบ</strong></td>					
                         </tr>
                     </thead>
-                <tbody>
+                <tbody >
                     <?php foreach ($result as $rows){ ?>
                         <?php $X = $rows['typelotto'];
                             if ($X == "CA") {
@@ -47,12 +48,12 @@ if (empty ($dealer_id)) {
                             }
                         ?>
                     <tr>
-                        <td><?php echo $X; ?></td>
-                        <td><?php echo $rows["number"]; ?></td>
-                        <td><?php echo $rows["amount"]; ?></td>
-                        <td><?php echo $rows["name"]; ?></td>
-                        <td><?php echo $rows["date"]; ?></td>
-                        <td>
+                        <td style="width: 10%;"><?php echo $X; ?></td>
+                        <td style="width: 10%;"><?php echo $rows["number"]; ?></td>
+                        <td style="width: 20%;"><?php echo number_format( $rows["amount"], 0 ) ?></td>
+                        <td style="width: 20%;"><?php echo $rows["name"]; ?></td>
+                        <td style="width: 20%;"><?php echo $rows["date"]; ?></td>
+                        <td style="width: 10%;">
                         <!-- ส่ง  checkbox เป็น array -->
                         <input name="del[]" type="checkbox"  value="<?php echo $rows['lottonumber_id']; ?>"></td>
                     </tr>
@@ -60,6 +61,7 @@ if (empty ($dealer_id)) {
                 </tbody>
             </table>
         </div>
+        <br>
     <div class="text-center">
     <button type="submit" class="btn btn-danger">ลบข้อมูล</button>
     &nbsp; 

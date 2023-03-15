@@ -181,3 +181,6 @@
     </div>
   </div>
 </div>
+<div class="no-print">
+<?php include("./page_report/page_report_foot.php"); ?>
+</div>
