@@ -167,14 +167,28 @@ if (empty($save_empty)) {
 function nextbox(e, id) {
    // อ่าน keycode (cross browser)
     var keycode = e.which || e.keyCode;
-    // ตรวจสอบ keycode (13 คือ กด enter)
-    if (keycode == 13) {
-        // ย้ายโฟกัสไปยัง input ที่ id
-        document.getElementById(id).select();
-        // return false เพื่อยกเลิกการ submit form
-        return false;
-    }
+    var x = document.getElementById("no1").value;
+
+    
+
+      // ตรวจสอบ keycode (13 คือ กด enter)
+      if (keycode == 13) {
+          if (x ==='') {
+            document.getElementById("no1").select();
+            // return false เพื่อยกเลิกการ submit form
+            return false;
+          } else {
+            // ย้ายโฟกัสไปยัง input ที่ id
+            document.getElementById(id).select();
+            // return false เพื่อยกเลิกการ submit form
+            return false;
+          }
+          
+      }
+
 }
+
+
 
 var formSubmitted = false; //ตัวแปรสำหรับตรวจสอบการส่งฟอร์ม
 var formSubmitting = false; //ตัวแปรสำหรับตรวจสอบการส่งฟอร์ม

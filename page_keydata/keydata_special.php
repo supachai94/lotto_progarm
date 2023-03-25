@@ -190,12 +190,19 @@ if (empty($check_num_type)) {
 function nextbox(e, id) {
    // อ่าน keycode (cross browser)
     var keycode = e.which || e.keyCode;
+    var x = document.getElementById("no1").value;
     // ตรวจสอบ keycode (13 คือ กด enter)
     if (keycode == 13) {
-        // ย้ายโฟกัสไปยัง input ที่ id
-        document.getElementById(id).select();
-        // return false เพื่อยกเลิกการ submit form
-        return false;
+          if (x ==='') {
+            document.getElementById("no1").select();
+            // return false เพื่อยกเลิกการ submit form
+            return false;
+          } else {
+            // ย้ายโฟกัสไปยัง input ที่ id
+            document.getElementById(id).select();
+            // return false เพื่อยกเลิกการ submit form
+            return false;
+          }
     }
 }
 

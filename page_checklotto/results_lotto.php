@@ -1,6 +1,7 @@
 <?php require './connect.php';
 
 require './page_keydata/function_keydata.php';
+
 // Check if the form has been submitted via POST method
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -17,148 +18,89 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // You can now use these variables in your code
 
     if (empty($two_upper)) {
-        # code...
+        echo "ไม่มีคนถูกหวย";
     } else {
-        //ดึงขอมูลสองตัวบน
-        $top2 = $conn->prepare("SELECT lottonumber.typelotto, lottonumber.number, lottonumber.amount, dealer.name FROM lottonumber INNER JOIN dealer ON lottonumber.dealer_id = dealer.dealer_id WHERE `typelotto` LIKE 'CA' AND `number` LIKE $two_upper;");
-        $top2->execute();
-        $result_top2 = $top2->fetchAll(); //แสดงข้อมูลทั้งหมด
+        // กำหนดค่าสตริงสำหรับคำสั่ง SQL
+        $search_typelotto = 'CA';
+        $search_number = $two_upper;
+
+        // สร้างคำสั่ง SQL ที่ต้องการพร้อมกับ bind ค่า parameter
+        $sql = "SELECT lottonumber.typelotto, lottonumber.number, lottonumber.amount, dealer.name FROM lottonumber INNER JOIN dealer ON lottonumber.dealer_id = dealer.dealer_id WHERE typelotto LIKE ? AND number LIKE ?";
+
+        // เตรียมคำสั่ง SQL สำหรับการ execute พร้อมกับ bind ค่า parameter
+        $top2 = $conn->prepare($sql);
+        $top2->execute(["%$search_typelotto%", "%$search_number%"]);
     }
 
     if (empty($two_lower)) {
-        # code...
+        echo "ไม่มีคนถูกหวย";
     } else {
-        //ดึงขอมูลสองตัวล่าง
-        $down2 = $conn->prepare("SELECT lottonumber.typelotto, lottonumber.number, lottonumber.amount, dealer.name FROM lottonumber INNER JOIN dealer ON lottonumber.dealer_id = dealer.dealer_id WHERE `typelotto` LIKE 'CB' AND `number` LIKE $two_lower;");
-        $down2->execute();
-        $result_down2 = $down2->fetchAll(); //แสดงข้อมูลทั้งหมด
+        // กำหนดค่าสตริงสำหรับคำสั่ง SQL
+        $search_typelotto = 'CB';
+        $search_number = $two_lower;
+    
+        // สร้างคำสั่ง SQL ที่ต้องการพร้อมกับ bind ค่า parameter
+        $sql = "SELECT lottonumber.typelotto, lottonumber.number, lottonumber.amount, dealer.name FROM lottonumber INNER JOIN dealer ON lottonumber.dealer_id = dealer.dealer_id WHERE typelotto LIKE ? AND number LIKE ?";
+    
+        // เตรียมคำสั่ง SQL สำหรับการ execute พร้อมกับ bind ค่า parameter
+        $down2 = $conn->prepare($sql);
+        $down2->execute(["%$search_typelotto%", "%$search_number%"]);
     }
 
     if (empty($three_upper)) {
-        # code...
+        echo "ไม่มีคนถูกหวย";
     } else {
-        //ดึงขอมูลสามตัวบน
-        $top3 = $conn->prepare("SELECT lottonumber.typelotto, lottonumber.number, lottonumber.amount, dealer.name FROM lottonumber INNER JOIN dealer ON lottonumber.dealer_id = dealer.dealer_id WHERE `typelotto` LIKE 'AB' AND `number` LIKE $three_upper;");
-        $top3->execute();
-        $result_top3 = $top3->fetchAll(); //แสดงข้อมูลทั้งหมด
+        // กำหนดค่าสตริงสำหรับคำสั่ง SQL
+        $search_typelotto = 'AB';
+        $search_number = $three_upper;
+        
+        // สร้างคำสั่ง SQL ที่ต้องการพร้อมกับ bind ค่า parameter
+        $sql = "SELECT lottonumber.typelotto, lottonumber.number, lottonumber.amount, dealer.name FROM lottonumber INNER JOIN dealer ON lottonumber.dealer_id = dealer.dealer_id WHERE typelotto LIKE ? AND number LIKE ?";
+        
+        // เตรียมคำสั่ง SQL สำหรับการ execute พร้อมกับ bind ค่า parameter
+        $top3 = $conn->prepare($sql);
+        $top3->execute(["%$search_typelotto%", "%$search_number%"]);
+
     }
 
     if (empty($three_lower_1) && empty($three_lower_2) && empty($three_lower_3) && empty($three_lower_4)) {
-        # code...
+        echo "ไม่มีคนถูกหวย";
     } else {
-        //ดึงขอมูลสามตัวล่าง
-        $down3 = $conn->prepare("SELECT lottonumber.typelotto, lottonumber.number, lottonumber.amount, dealer.name FROM lottonumber INNER JOIN dealer ON lottonumber.dealer_id = dealer.dealer_id WHERE `typelotto` IN ('AC') AND (`number` LIKE $three_lower_1 OR `number` LIKE $three_lower_2 OR `number` LIKE $three_lower_3 OR `number` LIKE $three_lower_4);");
-        $down3->execute();
-        $result_down3 = $down3->fetchAll(); //แสดงข้อมูลทั้งหมด
+            
+        // กำหนดค่าสตริงสำหรับคำสั่ง SQL
+        $search_typelotto = 'AC';
+        $search_number1 = $three_lower_1;
+        $search_number2 = $three_lower_2;
+        $search_number3 = $three_lower_3;
+        $search_number4 = $three_lower_4;
+        
+        // สร้างคำสั่ง SQL ที่ต้องการพร้อมกับ bind ค่า parameter
+        $sql = "SELECT lottonumber.typelotto, lottonumber.number, lottonumber.amount, dealer.name FROM lottonumber INNER JOIN dealer ON lottonumber.dealer_id = dealer.dealer_id WHERE typelotto LIKE ? AND (number LIKE ? OR number LIKE ? OR number LIKE ? OR number LIKE ?)";
+        
+        // เตรียมคำสั่ง SQL สำหรับการ execute พร้อมกับ bind ค่า parameter
+        $down3 = $conn->prepare($sql);
+        $down3->execute(["%$search_typelotto%", "%$search_number1%", "%$search_number2%", "%$search_number3%", "%$search_number4%"]);
     }
 
     if (empty($three_upper)) {
-        # code...
+        echo "ไม่มีคนถูกหวย";
     } else {
         $a = $three_upper;
         $_a = str_split($a);
         $rv = permutation($_a);
         $rv_min = min($rv);
-        //ดึงขอมูลสามตัวโต๊ด
-        $rv3 = $conn->prepare("SELECT lottonumber.typelotto, lottonumber.number, lottonumber.amount, dealer.name FROM lottonumber INNER JOIN dealer ON lottonumber.dealer_id = dealer.dealer_id WHERE `typelotto` LIKE 'AD' AND `number` LIKE $rv_min;");
-        $rv3->execute();
-        $result_rv3 = $rv3->fetchAll(); //แสดงข้อมูลทั้งหมด
-    }
 
-    //ตรวจเลขหกประตูบน
-    if (empty($three_upper)) {
-        # code...
-    } else {
-        $u = str_split($three_upper,1);
-        $first = $u[0];
-        $second = $u[1];
-        $third = $u[2];
-        //ดึงขอมูลสามตัวโต๊ด
-        $door6 = $conn->prepare("SELECT lottonumber.typelotto, lottonumber.number, lottonumber.amount, dealer.name FROM lottonumber INNER JOIN dealer ON lottonumber.dealer_id = dealer.dealer_id WHERE `typelotto` IN ('XC') AND (number LIKE '%$first%' AND number LIKE '%$second%' AND number LIKE '%$third%');");
-        $door6->execute();
-        $result_6door_top = $door6->fetchAll(); //แสดงข้อมูลทั้งหมด
-    }
-
-    //ตรวจเลขสามประตูบน
-    if (empty($three_upper)) {
-        # code...
-    } else {
-        $u = str_split($three_upper,1);
-        $first = $u[0];
-        $second = $u[1];
-        $third = $u[2];
-        //ดึงขอมูลสามตัวโต๊ด
-        $door3 = $conn->prepare("SELECT lottonumber.typelotto, lottonumber.number, lottonumber.amount, dealer.name FROM lottonumber INNER JOIN dealer ON lottonumber.dealer_id = dealer.dealer_id WHERE `typelotto` IN ('XA') AND (number LIKE '%$first%' AND number LIKE '%$second%' AND number LIKE '%$third%');");
-        $door3->execute();
-        $result_3door_top = $door3->fetchAll(); //แสดงข้อมูลทั้งหมด
-    }
-
-    //ตรวจเลขหกประตูล่าง
-    if (empty($three_lower_1) && empty($three_lower_2) && empty($three_lower_3) && empty($three_lower_4)) {
-        # code...
-    } else {
-        $i = str_split($three_lower_1,1);
-        $first1  = $i[0];
-        $second1 = $i[1];
-        $third1  = $i[2];
-
-        $j = str_split($three_lower_2,1);
-        $first2  = $j[0];
-        $second2 = $j[1];
-        $third2  = $j[2];
-
-        $k = str_split($three_lower_3,1);
-        $first3  = $k[0];
-        $second3 = $k[1];
-        $third3  = $k[2];
-
-        $l = str_split($three_lower_4,1);
-        $first4  = $l[0];
-        $second4 = $l[1];
-        $third4  = $l[2];
-
-        //ดึงขอมูลสามตัวล่าง
-        $door6down = $conn->prepare("SELECT lottonumber.typelotto, lottonumber.number, lottonumber.amount, dealer.name FROM lottonumber INNER JOIN dealer ON lottonumber.dealer_id = dealer.dealer_id WHERE `typelotto` IN ('XD') 
-                                    AND ((number LIKE '%$first1%' AND number LIKE '%$second1%' AND number LIKE '%$third1%') 
-                                      OR (number LIKE '%$first2%' AND number LIKE '%$second2%' AND number LIKE '%$third2%') 
-                                      OR (number LIKE '%$first3%' AND number LIKE '%$second3%' AND number LIKE '%$third3%') 
-                                      OR (number LIKE '%$first4%' AND number LIKE '%$second4%' AND number LIKE '%$third4%'));");
-        $door6down->execute();
-        $result_6door_down = $door6down->fetchAll(); //แสดงข้อมูลทั้งหมด
-    }
-
-    //ตรวจเลขสามประตูล่าง
-    if (empty($three_lower_1) && empty($three_lower_2) && empty($three_lower_3) && empty($three_lower_4)) {
-        # code...
-    } else {
-        $i = str_split($three_lower_1,1);
-        $first1  = $i[0];
-        $second1 = $i[1];
-        $third1  = $i[2];
-
-        $j = str_split($three_lower_2,1);
-        $first2  = $j[0];
-        $second2 = $j[1];
-        $third2  = $j[2];
-
-        $k = str_split($three_lower_3,1);
-        $first3  = $k[0];
-        $second3 = $k[1];
-        $third3  = $k[2];
-
-        $l = str_split($three_lower_4,1);
-        $first4  = $l[0];
-        $second4 = $l[1];
-        $third4  = $l[2];
-
-        //ดึงขอมูลสามตัวล่าง
-        $door3down = $conn->prepare("SELECT lottonumber.typelotto, lottonumber.number, lottonumber.amount, dealer.name FROM lottonumber INNER JOIN dealer ON lottonumber.dealer_id = dealer.dealer_id WHERE `typelotto` IN ('XB') 
-                                    AND ((number LIKE '%$first1%' AND number LIKE '%$second1%' AND number LIKE '%$third1%') 
-                                      OR (number LIKE '%$first2%' AND number LIKE '%$second2%' AND number LIKE '%$third2%') 
-                                      OR (number LIKE '%$first3%' AND number LIKE '%$second3%' AND number LIKE '%$third3%') 
-                                      OR (number LIKE '%$first4%' AND number LIKE '%$second4%' AND number LIKE '%$third4%'));");
-        $door3down->execute();
-        $result_3door_down = $door3down->fetchAll(); //แสดงข้อมูลทั้งหมด
+        // กำหนดค่าสตริงสำหรับคำสั่ง SQL
+        $search_typelotto = 'AD';
+        $search_number = $rv_min;
+        
+        // สร้างคำสั่ง SQL ที่ต้องการพร้อมกับ bind ค่า parameter
+        $sql = "SELECT lottonumber.typelotto, lottonumber.number, lottonumber.amount, dealer.name FROM lottonumber INNER JOIN dealer ON lottonumber.dealer_id = dealer.dealer_id WHERE typelotto LIKE ? AND number LIKE ?";
+        
+        // เตรียมคำสั่ง SQL สำหรับการ execute พร้อมกับ bind ค่า parameter
+        $rv3 = $conn->prepare($sql);
+        $rv3->execute(["%$search_typelotto%", "%$search_number%"]);
+        
     }
     
 }
@@ -170,10 +112,6 @@ $data_two_lower    = array();
 $data_three_upper  = array();
 $data_three_lower  = array();
 $data_rv3          = array();
-
-
-
-
 
 
 ?>
@@ -271,8 +209,8 @@ $data_rv3          = array();
 
 <div class="card">
   <div class="card-body">
-  <h4 class="card-header text-center bg-light">รายละเอียด</h4>
-    <table class="table table-hover text-center table-light">
+  <h4 class="card-header text-center bg-light">เลขรางวัลสองตัวบน <?php echo $two_upper ?></h4>
+    <table class="table table-hover text-center table-primary">
         <thead>
             <tr>
                 <th>ประเภทหวย</th>
@@ -283,87 +221,231 @@ $data_rv3          = array();
         </thead>
         <tbody>
             <?php
-                foreach ($result_top2 as $result_top2s) {
-                        array_push($data_two_upper,$result_top2s["amount"]);
-                    echo "<tr>
-                            <td>" . "สองตัวบน" . "</td>
-                            <td>" . $result_top2s["number"] . "</td>
-                            <td>" . $result_top2s["amount"] . "</td>
-                            <td>" . $result_top2s["name"] . "</td>
+                // ดึงข้อมูลทั้งหมดและแสดงผล
+                if ($top2->rowCount() > 0) {
+                    // ใช้ foreach loop เพื่อแสดงผลข้อมูลทีละแถว
+                    foreach($top2->fetchAll(PDO::FETCH_ASSOC) as $row) {
+                        array_push($data_two_upper,$row["amount"]);
+                        $X = $row["typelotto"];
+                        if ($X == "CA") {
+                            $X = "สองตัวบน";
+                          } elseif ($X == "CB") {
+                            $X = "สองตัวล่าง";
+                          } elseif ($X == "AB") {
+                            $X = "สามตัวบน";
+                          } elseif ($X == "AC") {
+                            $X = "สามตัวล่าง"; 
+                          } elseif ($X == "AD") {
+                            $X = "สามตัวโต๊ด"; 
+                          }else {
+                            $X = "";
+                          }
+                        echo "<tr>
+                            <td>" . $X . "</td>
+                            <td>" . $row["number"] . "</td>
+                            <td>" . $row["amount"] . "</td>
+                            <td>" . $row["name"] . "</td>
                         </tr>";
-                        }
-                foreach ($result_down2 as $result_down2s) {
-                        array_push($data_two_lower,$result_down2s["amount"]);
-                    echo "<tr>
-                            <td>" . "สองตัวล่าง" . "</td>
-                            <td>" . $result_down2s["number"] . "</td>
-                            <td>" . $result_down2s["amount"] . "</td>
-                            <td>" . $result_down2s["name"] . "</td>
-                          </tr>";
-                        }
-                foreach ($result_top3 as $result_top3s) {
-                        array_push($data_three_upper,$result_top3s["amount"]);
-                    echo "<tr>
-                            <td>" . "สามตัวบน" . "</td>
-                            <td>" . $result_top3s["number"] . "</td>
-                            <td>" . $result_top3s["amount"] . "</td>
-                            <td>" . $result_top3s["name"] . "</td>
-                          </tr>";
-                        }
-                foreach ($result_down3 as $result_down3s) {
-                        array_push($data_three_lower,$result_down3s["amount"]);
-                    echo "<tr>
-                            <td>" . "สามตัวล่าง" . "</td>
-                            <td>" . $result_down3s["number"] . "</td>
-                            <td>" . $result_down3s["amount"] . "</td>
-                            <td>" . $result_down3s["name"] . "</td>
-                          </tr>";
-                        }
-                foreach ($result_rv3 as $result_rv3s) {
-                        array_push($data_rv3,$result_rv3s["amount"]);
-                    echo "<tr>
-                            <td>" . "สามตัวโต๊ด" . "</td>
-                            <td>" . $result_rv3s["number"] . "</td>
-                            <td>" . $result_rv3s["amount"] . "</td>
-                            <td>" . $result_rv3s["name"] . "</td>
-                          </tr>";
-                        }
-                foreach ($result_6door_top as $result_6door_tops) {
-                        array_push($data_rv3,$result_6door_tops["amount"]);
-                    echo "<tr>
-                            <td>" . "เลขหกประตูบน" . "</td>
-                            <td>" . $result_6door_tops["number"] . "</td>
-                            <td>" . $result_6door_tops["amount"] . "</td>
-                            <td>" . $result_6door_tops["name"] . "</td>
-                          </tr>";
-                        }
-                foreach ($result_6door_down as $result_6door_downs) {
-                        array_push($data_rv3,$result_6door_downs["amount"]);
-                    echo "<tr>
-                            <td>" . "เลขหกประตูล่าง" . "</td>
-                            <td>" . $result_6door_downs["number"] . "</td>
-                            <td>" . $result_6door_downs["amount"] . "</td>
-                            <td>" . $result_6door_downs["name"] . "</td>
-                          </tr>";
-                        }
-                foreach ($result_3door_top as $result_3door_tops) {
-                        array_push($data_rv3,$result_3door_tops["amount"]);
-                    echo "<tr>
-                            <td>" . "เลขสามประตูบน" . "</td>
-                            <td>" . $result_3door_tops["number"] . "</td>
-                            <td>" . $result_3door_tops["amount"] . "</td>
-                            <td>" . $result_3door_tops["name"] . "</td>
-                          </tr>";
-                        }
-                foreach ($result_3door_down as $result_3door_downs) {
-                        array_push($data_rv3,$result_3door_downs["amount"]);
-                    echo "<tr>
-                            <td>" . "เลขสามประตูล่าง" . "</td>
-                            <td>" . $result_3door_downs["number"] . "</td>
-                            <td>" . $result_3door_downs["amount"] . "</td>
-                            <td>" . $result_3door_downs["name"] . "</td>
-                          </tr>";
-                        }
+                    }
+                } else {
+                    echo "<td colspan=" . 4 . ">ไม่มีผู้ถูกรางวัล</td>";
+                }
+            ?>
+        </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+  <h4 class="card-header text-center bg-light">เลขรางวัลสองตัวล่าง <?php echo $two_lower ?></h4>
+    <table class="table table-hover text-center table-success">
+        <thead>
+            <tr>
+                <th>ประเภทหวย</th>
+                <th>ตัวเลข</th>
+                <th>จำนวนเงิน</th>
+                <th>ตัวแทนจำหน่าย</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+                // ดึงข้อมูลทั้งหมดและแสดงผล
+                if ($down2->rowCount() > 0) {
+                    // ใช้ foreach loop เพื่อแสดงผลข้อมูลทีละแถว
+                    foreach($down2->fetchAll(PDO::FETCH_ASSOC) as $row) {
+                        array_push($data_two_lower,$row["amount"]);
+                        $X = $row["typelotto"];
+                        if ($X == "CA") {
+                            $X = "สองตัวบน";
+                          } elseif ($X == "CB") {
+                            $X = "สองตัวล่าง";
+                          } elseif ($X == "AB") {
+                            $X = "สามตัวบน";
+                          } elseif ($X == "AC") {
+                            $X = "สามตัวล่าง"; 
+                          } elseif ($X == "AD") {
+                            $X = "สามตัวโต๊ด"; 
+                          }else {
+                            $X = "";
+                          }
+                        echo "<tr>
+                            <td>" . $X . "</td>
+                            <td>" . $row["number"] . "</td>
+                            <td>" . $row["amount"] . "</td>
+                            <td>" . $row["name"] . "</td>
+                        </tr>";
+                    }
+                } else {
+                    echo "<td colspan=" . 4 . ">ไม่มีผู้ถูกรางวัล</td>";
+                }
+            ?>
+        </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+  <h4 class="card-header text-center bg-light">เลขรางวัลสามตัวบน <?php echo $three_upper ?></h4>
+    <table class="table table-hover text-center table-danger">
+        <thead>
+            <tr>
+                <th>ประเภทหวย</th>
+                <th>ตัวเลข</th>
+                <th>จำนวนเงิน</th>
+                <th>ตัวแทนจำหน่าย</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+                // ดึงข้อมูลทั้งหมดและแสดงผล
+                if ($top3->rowCount() > 0) {
+                    // ใช้ foreach loop เพื่อแสดงผลข้อมูลทีละแถว
+                    foreach($top3->fetchAll(PDO::FETCH_ASSOC) as $row) {
+                        array_push($data_three_upper,$row["amount"]);
+                        $X = $row["typelotto"];
+                        if ($X == "CA") {
+                            $X = "สองตัวบน";
+                          } elseif ($X == "CB") {
+                            $X = "สองตัวล่าง";
+                          } elseif ($X == "AB") {
+                            $X = "สามตัวบน";
+                          } elseif ($X == "AC") {
+                            $X = "สามตัวล่าง"; 
+                          } elseif ($X == "AD") {
+                            $X = "สามตัวโต๊ด"; 
+                          }else {
+                            $X = "";
+                          }
+                        echo "<tr>
+                            <td>" . $X . "</td>
+                            <td>" . $row["number"] . "</td>
+                            <td>" . $row["amount"] . "</td>
+                            <td>" . $row["name"] . "</td>
+                        </tr>";
+                    }
+                } else {
+                    echo "<td colspan=" . 4 . ">ไม่มีผู้ถูกรางวัล</td>";
+                }
+            ?>
+        </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+  <h4 class="card-header text-center bg-light">เลขรางวัลสามตัวล่าง <?php echo $three_lower_1 ?> <?php echo $three_lower_2 ?> <?php echo $three_lower_3 ?> <?php echo $three_lower_4 ?></h4>
+    <table class="table table-hover text-center table-warning">
+        <thead>
+            <tr>
+                <th>ประเภทหวย</th>
+                <th>ตัวเลข</th>
+                <th>จำนวนเงิน</th>
+                <th>ตัวแทนจำหน่าย</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+                // ดึงข้อมูลทั้งหมดและแสดงผล
+                if ($down3->rowCount() > 0) {
+                    // ใช้ foreach loop เพื่อแสดงผลข้อมูลทีละแถว
+                    foreach($down3->fetchAll(PDO::FETCH_ASSOC) as $row) {
+                        array_push($data_three_lower,$row["amount"]);
+                        $X = $row["typelotto"];
+                        if ($X == "CA") {
+                            $X = "สองตัวบน";
+                          } elseif ($X == "CB") {
+                            $X = "สองตัวล่าง";
+                          } elseif ($X == "AB") {
+                            $X = "สามตัวบน";
+                          } elseif ($X == "AC") {
+                            $X = "สามตัวล่าง"; 
+                          } elseif ($X == "AD") {
+                            $X = "สามตัวโต๊ด"; 
+                          }else {
+                            $X = "";
+                          }
+                        echo "<tr>
+                            <td>" . $X . "</td>
+                            <td>" . $row["number"] . "</td>
+                            <td>" . $row["amount"] . "</td>
+                            <td>" . $row["name"] . "</td>
+                        </tr>";
+                    }
+                } else {
+                    echo "<td colspan=" . 4 . ">ไม่มีผู้ถูกรางวัล</td>";
+                }
+            ?>
+        </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+  <h4 class="card-header text-center bg-light">เลขรางวัลสามตัวโต๊ด <?php echo $rv_min ?> (<?php echo $three_upper ?>)</h4>
+    <table class="table table-hover text-center table-info">
+        <thead>
+            <tr>
+                <th>ประเภทหวย</th>
+                <th>ตัวเลข</th>
+                <th>จำนวนเงิน</th>
+                <th>ตัวแทนจำหน่าย</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+                // ดึงข้อมูลทั้งหมดและแสดงผล
+                if ($rv3->rowCount() > 0) {
+                    // ใช้ foreach loop เพื่อแสดงผลข้อมูลทีละแถว
+                    foreach($rv3->fetchAll(PDO::FETCH_ASSOC) as $row) {
+                        array_push($data_rv3,$row["amount"]);
+                        $X = $row["typelotto"];
+                        if ($X == "CA") {
+                            $X = "สองตัวบน";
+                          } elseif ($X == "CB") {
+                            $X = "สองตัวล่าง";
+                          } elseif ($X == "AB") {
+                            $X = "สามตัวบน";
+                          } elseif ($X == "AC") {
+                            $X = "สามตัวล่าง"; 
+                          } elseif ($X == "AD") {
+                            $X = "สามตัวโต๊ด"; 
+                          }else {
+                            $X = "";
+                          }
+                        echo "<tr>
+                            <td>" . $X . "</td>
+                            <td>" . $row["number"] . "</td>
+                            <td>" . $row["amount"] . "</td>
+                            <td>" . $row["name"] . "</td>
+                        </tr>";
+                    }
+                } else {
+                    echo "<td colspan=" . 4 . ">ไม่มีผู้ถูกรางวัล</td>";
+                }
             ?>
         </tbody>
     </table>

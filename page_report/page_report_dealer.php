@@ -26,11 +26,13 @@ if(empty($_SESSION['username']) && empty($_SESSION['password'])){
 
 if(isset($_GET['id'])){
 $id = $_GET['id'];
-$getdata = $conn->query("SELECT dealer.name, dealer.discount, lottonumber.typelotto, lottonumber.number, SUM(lottonumber.amount) AS amount FROM lottonumber INNER JOIN dealer ON lottonumber.dealer_id = dealer.dealer_id WHERE lottonumber.dealer_id = $id GROUP BY number DESC;")->fetchAll();
-$name = $getdata[0][0];
-$discount = $getdata[0][1];
+$getdata = $conn->query("SELECT typelotto, number, SUM(amount) AS amount, dealer_id FROM `lottonumber` WHERE dealer_id = $id GROUP BY typelotto, number ORDER BY typelotto DESC;")->fetchAll();
+$getdata_dealer = $conn->query("SELECT * FROM `dealer` WHERE `dealer_id` = $id")->fetchAll();
+$name = $getdata_dealer[0][1];
+$discount = $getdata_dealer[0][2];
 $data_array = array();
 }
+
 ?>
 <!doctype html>
 <html lang="en">
