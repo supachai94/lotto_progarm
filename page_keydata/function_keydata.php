@@ -224,48 +224,4 @@ function limit_check($typelotto) {
     }
     $conn = null; //close connect db
 }
-
-//$amount = 1000;
-//$limit = 500;
-//$typelotto = "XD";
-//
-//$stmt = $conn->prepare("SELECT* FROM keep");
-//$stmt->execute();
-//$result = $stmt->fetchAll();
-//
-//if ($amount > $limit) {
-//    if  ($typelotto == "XA") {
-//        $X = "สามประตูบน";
-//    } elseif 
-//        ($typelotto == "XB") {
-//        $X = "สามประตูล่าง";
-//    } elseif 
-//        ($typelotto == "XC") {
-//        $X = "หกประตูบน";
-//    } elseif 
-//        ($typelotto == "XD") {
-//        $X = "หกประตูล่าง"; 
-//    } elseif 
-//        ($typelotto == "CA") {
-//        $X = "สองตัวบน";
-//    } elseif 
-//        ($typelotto == "CB") {
-//        $X = "สองตัวล่าง";
-//    } elseif 
-//        ($typelotto == "AB") {
-//        $X = "สามตัวบน";
-//    } elseif 
-//        ($typelotto == "AC") {
-//        $X = "สามตัวล่าง"; 
-//    } elseif 
-//        ($typelotto == "AD") {
-//        $X = "สามตัวโต๊ด"; 
-//    }else {
-//        $X = "";
-//    }
-//    echo "บันทึกตัดส่ง";
-//} else {
-//    echo "บันทึกข้อมูล";
-//}
-
 ?>
